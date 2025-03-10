@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     tools {
-        jdk 'jdk11'
-        maven 'maven3'
+        jdk 'JDK-11'
+        maven 'mvn-3.9'
     }
     
     environment{
-        SCANNER_HOME= tool 'sonar-scanner'
+        SCANNER_HOME= tool 'sonarq'
     }
 
     stages {
@@ -31,7 +31,7 @@ pipeline {
         
         stage('Sonarqube Analysis') {
             steps {
-                    withSonarQubeEnv('sonar-server') {
+                    withSonarQubeEnv('sonarq') {
                         sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Java-WebApp \
                         -Dsonar.java.binaries=. \
                         -Dsonar.projectKey=Java-WebApp '''
